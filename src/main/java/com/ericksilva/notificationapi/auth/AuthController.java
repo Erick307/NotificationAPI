@@ -5,9 +5,9 @@ import com.ericksilva.notificationapi.auth.dto.AuthResponse;
 import com.ericksilva.notificationapi.user.User;
 import com.ericksilva.notificationapi.user.UserPrincipal;
 import com.ericksilva.notificationapi.user.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(
-        @RequestBody AuthRequest request
+            @Valid @RequestBody AuthRequest request
     ) {
         User user = userService.register(
                 request.getEmail(),
@@ -35,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(
-            @RequestBody AuthRequest request
+            @Valid @RequestBody AuthRequest request
     ) {
         UserPrincipal user;
         try {

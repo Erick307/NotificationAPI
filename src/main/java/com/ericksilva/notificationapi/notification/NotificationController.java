@@ -3,6 +3,7 @@ package com.ericksilva.notificationapi.notification;
 import com.ericksilva.notificationapi.auth.JwtService;
 import com.ericksilva.notificationapi.notification.dto.NotificationRequest;
 import com.ericksilva.notificationapi.notification.dto.NotificationResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity<NotificationResponse> createNotification (
             @RequestHeader("Authorization") String authHeader,
-            @RequestBody NotificationRequest request
+            @Valid @RequestBody NotificationRequest request
     ) {
         Long userId = jwtService
                 .getUserId(authHeader.substring(7))
@@ -58,7 +59,7 @@ public class NotificationController {
     public ResponseEntity<NotificationResponse> updateNotification(
             @RequestHeader("Authorization") String authHeader,
             @PathVariable Long id,
-            @RequestBody NotificationRequest request
+            @Valid @RequestBody NotificationRequest request
     ){
         Long userId = jwtService
                 .getUserId(authHeader.substring(7))
