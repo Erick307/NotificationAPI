@@ -11,7 +11,7 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> jojofrula(MethodArgumentNotValidException exception){
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception){
         String message = Objects.requireNonNull(exception
                         .getBindingResult()
                         .getFieldError())
